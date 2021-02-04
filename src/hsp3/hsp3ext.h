@@ -25,5 +25,4 @@
 #include "emscripten/hsp3ext_emscripten.h"
 #endif
 
-
 #endif

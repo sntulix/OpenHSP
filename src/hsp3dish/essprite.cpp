@@ -7,7 +7,7 @@
 #if defined(HSPWIN) || defined(HSPLINUX) || defined(HSPEMSCRIPTEN)
 #include "../hsp3/hsp3config.h"
 #else
-#include "hsp3config.h"
+#include "../hsp3/hsp3config.h"
 #endif
 
 #ifdef HSPWIN
@@ -18,6 +18,7 @@
 #include <math.h>
 #include <algorithm>
 
+#include "hspwnd_dish.h"
 #include "essprite.h"
 #include "supio.h"
 

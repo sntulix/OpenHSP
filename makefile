@@ -1,10 +1,13 @@
 CC = gcc
 CXX = g++
 AR = ar
-CFLAGS_DISH = -Wno-write-strings --exec-charset=UTF-8 -DHSPDISH -DHSPLINUX -DHSPDEBUG -DUSE_OBAQ
-CFLAGS_GP = -Wno-write-strings --exec-charset=UTF-8 -DHSPDISH -DHSPDISHGP -DHSPLINUX -DHSPDEBUG -I src/hsp3dish/extlib/src -I src/hsp3dish/extlib/src/glew -I src/hsp3dish/gameplay/src -std=c++11
-CFLAGS_CL = -Wno-write-strings -std=c++11 --exec-charset=UTF-8 -DHSPLINUX -DHSPDEBUG
-CFLAGS_CMP = -Wno-write-strings -std=c++11 --exec-charset=UTF-8 -DHSPLINUX -DHSPDEBUG
+CFLAGS_DISH = `sdl-config --cflags` `sdl2-config --cflags` -Wno-write-strings -DHSPDISH -DHSPLINUX -DHSPDEBUG -DUSE_OBAQ -DUSE_TTFFONT 
+CPPFLAGS_DISH = `sdl-config --cflags` `sdl2-config --cflags` -Wno-write-strings -DHSPDISH -DHSPLINUX -DHSPDEBUG -DUSE_OBAQ -DUSE_TTFFONT 
+CFLAGS_GP = -Wno-write-strings -DHSPDISH -DHSPLINUX -DHSPDEBUG -I src/hsp3dish/extlib/src -I src/hsp3dish/extlib/src/glew -I src/hsp3dish/gameplay/src
+CPPFLAGS_GP = -Wno-write-strings -DHSPDISH -DHSPLINUX -DHSPDEBUG -I src/hsp3dish/extlib/src -I src/hsp3dish/extlib/src/glew -I src/hsp3dish/gameplay/src -std=c++11
+CFLAGS_CL = -Wno-write-strings -DHSPLINUX -DHSPDEBUG -DUSE_TTFFONT
+CPPFLAGS_CL = -Wno-write-strings -std=c++11  -DHSPLINUX -DHSPDEBUG -DUSE_TTFFONT
+CFLAGS_CMP = -Wno-write-strings -std=c++11  -DHSPLINUX -DHSPDEBUG
 
 OBJS = \
 	src/hsp3/dpmread.do \
@@ -27,27 +30,40 @@ OBJS = \
 	src/hsp3/stack.do \
 	src/hsp3/strbuf.do \
 	src/hsp3/strnote.do \
-	src/hsp3/linux/hsp3ext_sock.do \
-	src/hsp3/linux/devctrl_io.do \
 	src/hsp3dish/essprite.do \
 	src/hsp3dish/texmes.do \
 	src/hsp3dish/sysreq.do \
-	src/hsp3dish/emscripten/hgtex.do \
-	src/hsp3dish/emscripten/hgiox.do \
-	src/hsp3dish/emscripten/mmman.do \
-	src/hsp3dish/emscripten/main.do \
-	src/hsp3dish/emscripten/stb_image.do \
-	src/hsp3dish/emscripten/fontsystem.do \
+	src/hsp3dish/macOS/hgtex.do \
+	src/hsp3dish/macOS/hgiox.do \
+	src/hsp3dish/macOS/fontsystem.do \
+	src/hsp3dish/macOS/supio_macOS.do \
+	src/hsp3dish/macOS/hsp3dish.do \
+	src/hsp3dish/macOS/mmman.do \
+	src/hsp3dish/macOS/webtask_macOS.do \
+	src/hsp3dish/macOS/stb_image.do \
+	src/hsp3dish/macOS/main.do \
 	src/hsp3dish/obaq/omkedraw.do \
 	src/hsp3dish/obaq/hsp3dw.do \
 	src/hsp3dish/obaq/game.do \
 	src/obaq/physics/rock.do \
 	src/obaq/physics/vessel.do \
-	src/hsp3dish/linux/hsp3dish.do \
-	src/hsp3dish/linux/webtask_linux.do \
-	src/hsp3dish/linux/supio_linux.do
 
 OBJS_CMP = \
+	src/hsp3/hsp3.o \
+	src/hsp3/hsp3code.o \
+	src/hsp3/hsp3debug.o \
+	src/hsp3/hsp3int.o \
+	src/hsp3/sysreq.o \
+	src/hsp3/hspvar_core.o \
+	src/hsp3/hspvar_double.o \
+	src/hsp3/hspvar_int.o \
+	src/hsp3/hspvar_label.o \
+	src/hsp3/hspvar_str.o \
+	src/hsp3/hspvar_struct.o \
+	src/hsp3/stack.o \
+	src/hsp3/strbuf.o \
+	src/hsp3/strnote.o \
+	src/hsp3/dpmread.o \
 	src/hspcmp/ahtmodel.o \
 	src/hspcmp/ahtobj.o \
 	src/hspcmp/codegen.o \
@@ -59,18 +75,31 @@ OBJS_CMP = \
 	src/hspcmp/localinfo.o \
 	src/hspcmp/main.o \
 	src/hspcmp/membuf.o \
-	src/hspcmp/strnote.o \
 	src/hspcmp/tagstack.o \
 	src/hspcmp/hsmanager.o \
 	src/hspcmp/token.o \
-	src/hspcmp/linux/supio_linux.o
+	src/hsp3dish/geometry.o \
+	src/hsp3dish/texmes.o \
+	src/hsp3dish/essprite.o \
+	src/hsp3dish/hsp3gr_dish.o \
+	src/hsp3dish/hspwnd_obj.o \
+	src/hsp3dish/hspwnd_dish.o \
+	src/hsp3dish/hspwnd_edit.o \
+	src/hsp3dish/macOS/hgtex.o \
+	src/hsp3dish/macOS/hgiox.o \
+	src/hsp3dish/macOS/fontsystem.o \
+	src/hsp3dish/macOS/supio_macOS.o \
+	src/hsp3dish/macOS/hsp3dish.o \
+	src/hsp3dish/macOS/mmman.o \
+	src/hsp3dish/macOS/webtask_macOS.o \
+	src/hsp3dish/macOS/stb_image.o \
 
 OBJS_CL = \
-	src/hsp3/linux/main.o \
 	src/hsp3/hsp3.o \
 	src/hsp3/hsp3code.o \
 	src/hsp3/hsp3debug.o \
 	src/hsp3/hsp3int.o \
+	src/hsp3/sysreq.o \
 	src/hsp3/hspvar_core.o \
 	src/hsp3/hspvar_double.o \
 	src/hsp3/hspvar_int.o \
@@ -81,12 +110,22 @@ OBJS_CL = \
 	src/hsp3/strbuf.o \
 	src/hsp3/strnote.o \
 	src/hsp3/dpmread.o \
-	src/hsp3/linux/supio_linux.o \
-	src/hsp3/linux/hsp3cl.o \
-	src/hsp3/linux/hsp3ext_linux.o \
-	src/hsp3/linux/hsp3ext_sock.o \
-	src/hsp3/linux/devctrl_io.o \
-	src/hsp3/linux/hsp3gr_linux.o
+	src/hsp3dish/geometry.o \
+	src/hsp3dish/texmes.o \
+	src/hsp3dish/essprite.o \
+	src/hsp3dish/hsp3gr_dish.o \
+	src/hsp3dish/hspwnd_obj.o \
+	src/hsp3dish/hspwnd_dish.o \
+	src/hsp3dish/hspwnd_edit.o \
+	src/hsp3dish/macOS/hgtex.o \
+	src/hsp3dish/macOS/hgiox.o \
+	src/hsp3dish/macOS/fontsystem.o \
+	src/hsp3dish/macOS/supio_macOS.o \
+	src/hsp3dish/macOS/hsp3dish.o \
+	src/hsp3dish/macOS/mmman.o \
+	src/hsp3dish/macOS/webtask_macOS.o \
+	src/hsp3dish/macOS/stb_image.o \
+	src/hsp3dish/macOS/main.o \
 
 OBJS_GP = \
 	src/hsp3/dpmread.gpo \
@@ -109,15 +148,18 @@ OBJS_GP = \
 	src/hsp3/stack.gpo \
 	src/hsp3/strbuf.gpo \
 	src/hsp3/strnote.gpo \
-	src/hsp3/linux/hsp3ext_sock.gpo \
-	src/hsp3/linux/devctrl_io.gpo \
 	src/hsp3dish/essprite.gpo \
 	src/hsp3dish/texmes.gpo \
 	src/hsp3dish/sysreq.gpo \
-	src/hsp3dish/emscripten/mmman.gpo \
-	src/hsp3dish/emscripten/main.gpo \
-	src/hsp3dish/emscripten/stb_image.gpo \
-	src/hsp3dish/emscripten/fontsystem.gpo \
+	src/hsp3dish/macOS/hgtex.gpo \
+	src/hsp3dish/macOS/hgiox.gpo \
+	src/hsp3dish/macOS/fontsystem.gpo \
+	src/hsp3dish/macOS/supio_macOS.gpo \
+	src/hsp3dish/macOS/hsp3dish.gpo \
+	src/hsp3dish/macOS/mmman.gpo \
+	src/hsp3dish/macOS/webtask_macOS.gpo \
+	src/hsp3dish/macOS/stb_image.gpo \
+	src/hsp3dish/macOS/main.gpo \
 	src/hsp3dish/win32gp/hgiox.gpo \
 	src/hsp3dish/win32gp/gamehsp.gpo \
 	src/hsp3dish/win32gp/gpevent.gpo \
@@ -125,9 +167,6 @@ OBJS_GP = \
 	src/hsp3dish/win32gp/gplgt.gpo \
 	src/hsp3dish/win32gp/gpmat.gpo \
 	src/hsp3dish/win32gp/gpphy.gpo \
-	src/hsp3dish/linux/hsp3dish.gpo \
-	src/hsp3dish/linux/webtask_linux.gpo \
-	src/hsp3dish/linux/supio_linux.gpo
 
 OBJS_GAMEPLAY = \
 	src/hsp3dish/gameplay/src/AbsoluteLayout.gpo \
@@ -202,7 +241,6 @@ OBJS_GAMEPLAY = \
 	src/hsp3dish/gameplay/src/PhysicsVehicleWheel.gpo \
 	src/hsp3dish/gameplay/src/Plane.gpo \
 	src/hsp3dish/gameplay/src/Platform.gpo \
-	src/hsp3dish/gameplay/src/PlatformEmscripten.gpo \
 	src/hsp3dish/gameplay/src/Properties.gpo \
 	src/hsp3dish/gameplay/src/Quaternion.gpo \
 	src/hsp3dish/gameplay/src/RadioButton.gpo \
@@ -405,9 +443,9 @@ OBJS_LINEAR_MATH = \
 	src/hsp3dish/extlib/src/LinearMath/btSerializer.gpo \
 	src/hsp3dish/extlib/src/LinearMath/btVector3.gpo
 
-TARGETS = hsp3dish hsp3gp hsp3cl hspcmp hsed
-LIBS1 = -lm -lGL -lEGL -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lstdc++
-LIBS2 = -lm -lGL -lEGL -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lstdc++
+TARGETS = hsp3dish hsp3cl hspcmp hsed
+LIBS1 = -lm -framework OpenGL -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lstdc++
+LIBS2 = -lm -framework OpenGL -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lstdc++
 LIBS_GP = \
 	libgameplay.a \
 	libBulletDynamics.a \
@@ -418,32 +456,32 @@ all: $(TARGETS)
 
 .SUFFIXES: .cpp
 hsp3dish: $(OBJS)
-	$(CXX) $(CFLAGS_DISH) $(OBJS) -s -o $@ $(LIBS1)
+	$(CXX) $(CPPFLAGS_DISH) $(OBJS) -s -o $@ $(LIBS1)
 %.do: %.c
 	$(CC) $(CFLAGS_DISH) -c $< -o $*.do
 %.do: %.cpp
-	$(CXX) $(CFLAGS_DISH) -c $< -o $*.do
+	$(CXX) $(CPPFLAGS_DISH) -c $< -o $*.do
 
-hsp3gp: $(OBJS_GP) $(LIBS_GP)
-	$(CXX) $(CFLAGS_GP) $(OBJS_GP) -s -o $@ $(LIBS2) $(LIBS_GP)
-%.gpo: %.c
-	$(CC) $(CFLAGS_GP) -c $< -o $*.gpo
-%.gpo: %.cpp
-	$(CXX) $(CFLAGS_GP) -c $< -o $*.gpo
+#hsp3gp: $(OBJS_GP) $(LIBS_GP)
+#	$(CXX) $(CPPFLAGS_GP) $(OBJS_GP) -s -o $@ $(LIBS2) $(LIBS_GP)
+#%.gpo: %.c
+#	$(CC) $(CFLAGS_GP) -c $< -o $*.gpo
+#%.gpo: %.cpp
+#	$(CXX) $(CPPFLAGS_GP) -c $< -o $*.gpo
 
 hspcmp: $(OBJS_CMP)
-	$(CXX) $(CFLAGS_CMP) $(OBJS_CMP) -s -o $@
+	$(CXX) $(CPPFLAGS_CMP) $(OBJS_CMP) -s -o $@ $(LIBS1)
 %.o: %.c
 	$(CC) $(CFLAGS_CMP) -c $< -o $*.o
 %.o: %.cpp
-	$(CXX) $(CFLAGS_CMP) -c $< -o $*.o
+	$(CXX) $(CPPFLAGS_CMP) -c $< -o $*.o
 
 hsp3cl: $(OBJS_CL)
-	$(CXX) $(CFLAGS_CL) $(OBJS_CL) -lm -lstdc++ -s -o $@
+	$(CXX) $(CPPFLAGS_CL) $(OBJS_CL) -lm -lstdc++ -s -o $@ $(LIBS1)
 %.o: %.c
 	$(CC) $(CFLAGS_CL) -c $< -o $*.o
 %.o: %.cpp
-	$(CXX) $(CFLAGS_CL) -c $< -o $*.o
+	$(CXX) $(CPPFLAGS_CL) -c $< -o $*.o
 
 hsed: src/tools/hsed_gtk2.cpp src/tools/supio.cpp
 	$(CXX) -O2 -Wno-write-strings -o hsed src/tools/hsed_gtk2.cpp src/tools/supio.cpp `pkg-config --cflags --libs gtk+-2.0`

@@ -56,7 +56,7 @@ extern SDL_Window *window;
 
 #if defined(HSPLINUX)
 #include <unistd.h>
-#include <GL/gl.h>
+#include <OpenGL/OpenGL.h>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 //#include "SDL/SDL_opengl.h"

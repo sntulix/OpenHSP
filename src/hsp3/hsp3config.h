@@ -88,5 +88,6 @@
 #ifdef HSPLINUX
 #undef JPNMSG
 #endif
+#define HSP_MAX_PATH	256
 
 #endif

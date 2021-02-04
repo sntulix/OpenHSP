@@ -45,6 +45,8 @@ char *hsp3dish_getlog(void);		// for gameplay3d log
 #include "supio.h"
 #include "sysreq.h"
 #include "webtask.h"
+#include "macOS/mmman.h"
+#include "macOS/webtask_macOS.h"
 
 #ifdef HSPWIN
 #include "win32/dxsnd.h"

@@ -80,8 +80,13 @@ int hgio_fontsystem_get_texid(void);
 //#include <EGL/egl.h>
 
 #define GL_GLEXT_PROTOTYPES
+#ifdef __APPLE__
+#include <OpenGL/OpenGL.h>
+#include <OpenGL/glext.h>
+#else
 #include <GL/gl.h>
 #include <GL/glext.h>
+#endif
 
 //#include <GL/glut.h>
 

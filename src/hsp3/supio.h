@@ -35,6 +35,7 @@
 #include "emscripten/supio_emscripten.h"
 #endif
 
+#include "macOS/supio_macOS.h"
 
 #endif
 

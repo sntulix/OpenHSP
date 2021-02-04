@@ -8,7 +8,7 @@
 #if defined(HSPWIN) || defined(HSPLINUX) || defined(HSPEMSCRIPTEN)
 #include "../hsp3/hsp3config.h"
 #else
-#include "hsp3config.h"
+#include "../hsp3/hsp3config.h"
 #endif
 #include "../hsp3/dpmread.h"
 #include "hspwnd_dish.h"

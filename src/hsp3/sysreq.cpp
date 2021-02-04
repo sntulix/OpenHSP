@@ -7,7 +7,7 @@
 #include <stdarg.h>
 #include "sysreq.h"
 
-#include "hgio.h"
+#include "../hsp3dish/hgio.h"
 #include "supio.h"
 
 static int	sysreq[SYSREQ_MAX];		// 初期設定データプール
