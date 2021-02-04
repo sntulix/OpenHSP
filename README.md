@@ -82,6 +82,26 @@ GUIエディタだけでなく、コマンドラインから「./hsp3dish ****.a
 	※ Raspberry Pi4ではフルスクリーンによる実行はサポートされません
 
 
+# macOSインストール (※macOS CatalinaとXcode 12.3で確認しました)
+
+githubから最新のリポジトリを取得してご使用ください。
+
+	git clone https://github.com/sntulix/OpenHSP -b macos_openhsp-experimental_from_hsp3dish_emscripten
+
+アーカイブにはソースのみが含まれていますので、makeによってコンパイルする必要があります。
+コンパイルには、gcc及びmakeなどXcode コマンドライン ツールを実行できる環境が必要です。
+
+コンパイルの際には、以下のライブラリが必要になりますので、あらかじめ確認を行なって下さい。
+
+	brew install sdl sdl_image sdl_mixer sdl_ttf sdl2 sdl2_image sdl2_mixer sdl2_ttf
+
+アーカイブの内容が展開されたディレクトリでmakeコマンドを実行してください。
+
+	make
+
+必要なツールのコンパイルが行なわれ、HSP3が使用できる状態になります。※今はhspcmpのみ動きます。
+
+
 # 使用方法
 
 HSP3は、オープンソースとして公開されているOpenHSP技術をベースに、
